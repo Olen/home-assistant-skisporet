@@ -26,6 +26,7 @@ _LOGGER = logging.getLogger(__name__)
 
 ATTR_DISTANCE = "distance"
 ATTR_PROPERTIES = "properties"
+ATTR_LAST_PREP = "last_prep"
 
 DEFAULT_NAME = "skisporet"
 
@@ -56,6 +57,7 @@ class SkisporetSensor(Entity):
         self._state = None
         self._distance = None
         self._properties = None
+        self._last_prep = None
         self.hass = hass
         self.entity_slug = "Skisporet {}".format(self._name)
         self.entity_id = ENTITY_ID_FORMAT.format(
@@ -82,6 +84,7 @@ class SkisporetSensor(Entity):
         return {
                 ATTR_DISTANCE: self._distance,
                 ATTR_PROPERTIES: self._properties,
+                ATTR_LAST_PREP: self._last_prep,
                 }
 
 
@@ -123,6 +126,7 @@ class SkisporetSensor(Entity):
             key = str(parsed[0][0][i]).replace(":", "").strip()
             val = str(parsed[0][1][i]).replace("Smøretips", "").strip()
             if key == "Oppdatert":
+                self._last_prep = val
                 self._state = self._parse_timestamp(val)
             if key == "Lengde":
                 self._distance = val
