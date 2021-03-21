@@ -27,6 +27,7 @@ _LOGGER = logging.getLogger(__name__)
 ATTR_DISTANCE = "distance"
 ATTR_PROPERTIES = "properties"
 ATTR_LAST_PREP = "last_prep"
+ICON = 'mdi:ski'
 
 DEFAULT_NAME = "skisporet"
 
@@ -74,6 +75,10 @@ class SkisporetSensor(Entity):
         return self._name
 
     @property
+    def icon(self):
+        """Return the name of the sensor."""
+        return ICON
+    @property
     def state(self):
         """Return the state of the device."""
         if self._state:
@@ -98,7 +103,7 @@ class SkisporetSensor(Entity):
 
     async def async_update(self):
         """Fetch status from skisporet."""
-        _LOGGER.debug(f"Updating skisporet-sensor for {self._name}")
+        _LOGGER.info(f"Updating skisporet-sensor for {self._name}")
 
         d = (int(datetime.now().astimezone().strftime("%s")) - (datetime.now()-datetime.utcnow()).seconds) * 1000
         # d = int(datetime.now().strftime('%s')) * 1000
@@ -122,7 +127,7 @@ class SkisporetSensor(Entity):
             return
     
         parsed = pd.read_html(skisporet['_tapestry']['content'][0][1])
-        _LOGGER.debug(f"Got data from skisporet-sensor for {self._name}, {parsed}")
+        _LOGGER.info(f"Got data from skisporet-sensor for {self._name}, {parsed}")
     
         i=0
         o = {}
