@@ -76,6 +76,8 @@ class SkisporetSensor(Entity):
     @property
     def state(self):
         """Return the state of the device."""
+        if self._state:
+            return self._state.astimezone().isoformat()
         return self._state
 
     @property
@@ -96,8 +98,10 @@ class SkisporetSensor(Entity):
 
     async def async_update(self):
         """Fetch status from skisporet."""
-        _LOGGER.info(f"Updating skisporet-sensor for {self._name}")
-        d = int(datetime.now().strftime('%s')) * 1000
+        _LOGGER.debug(f"Updating skisporet-sensor for {self._name}")
+
+        d = (int(datetime.now().astimezone().strftime("%s")) - (datetime.now()-datetime.utcnow()).seconds) * 1000
+        # d = int(datetime.now().strftime('%s')) * 1000
         data = f't%3Azoneid=TmpId_{d}' 
 
         url = self._url.split("/")
@@ -118,7 +122,7 @@ class SkisporetSensor(Entity):
             return
     
         parsed = pd.read_html(skisporet['_tapestry']['content'][0][1])
-        _LOGGER.info(f"Got data from skisporet-sensor for {self._name}, {parsed}")
+        _LOGGER.debug(f"Got data from skisporet-sensor for {self._name}, {parsed}")
     
         i=0
         o = {}
@@ -161,15 +165,24 @@ class SkisporetSensor(Entity):
                 precision = 'M'
 
         dt = datetime.now() - timedelta(days=days, hours=hours, minutes=minutes)
+        # Dont bother with rounding errors
         if precision == '0':
             last = dt.replace(hour=0, minute=0, second=0, microsecond=0)
+            if self._state and (last - self._state).seconds < (60 * 60 * 24):
+                last = self._state
         if precision == 'D':
             last = dt.replace(hour=0, minute=0, second=0, microsecond=0)
+            if self._state and (last - self._state).seconds < (60 * 60 * 24):
+                last = self._state
         if precision == 'T':
             last = dt.replace(minute=0, second=0, microsecond=0)
+            if self._state and (last - self._state).seconds < (60 * 60):
+                last = self._state
         if precision == 'M':
             last = dt.replace(second=0, microsecond=0)
-        return last.astimezone().isoformat()
+            if self._state and (last - self._state).seconds < 60:
+                last = self._state
+        return last
 
 
 
