@@ -103,7 +103,7 @@ class SkisporetSensor(Entity):
 
     async def async_update(self):
         """Fetch status from skisporet."""
-        _LOGGER.info(f"Updating skisporet-sensor for {self._name}")
+        _LOGGER.debug(f"Updating skisporet-sensor for {self._name}")
 
         d = (int(datetime.now().astimezone().strftime("%s")) - (datetime.now()-datetime.utcnow()).seconds) * 1000
         # d = int(datetime.now().strftime('%s')) * 1000
@@ -127,7 +127,7 @@ class SkisporetSensor(Entity):
             return
     
         parsed = pd.read_html(skisporet['_tapestry']['content'][0][1])
-        _LOGGER.info(f"Got data from skisporet-sensor for {self._name}, {parsed}")
+        _LOGGER.debug(f"Got data from skisporet-sensor for {self._name}, {parsed}")
     
         i=0
         o = {}
