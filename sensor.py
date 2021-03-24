@@ -152,7 +152,10 @@ class SkisporetSensor(Entity):
         
     
         for part in parts:
-            if "uke" in part:
+            if part == "Akkurat nå":
+                minutes = 1
+                precision = 'M'
+            elif "uke" in part:
                 part = int(re.sub('\D', '', part))
                 days = days + (part * 7)
                 precision = '0'
