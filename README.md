@@ -7,13 +7,11 @@ Adds a sensor to get the last time a ski track was prepared according to skispor
 * copy all the files from this repo to the new folder
 
 ## Config
-To set up a new sensor, you need the URL to the popup window on the map from skisporet.no
-* Open the map in a browser
-* Open developer mode in the browser
+To set up a new sensor, you need the track-id from skisporet.no
+* Open the map in a browser https://skisporet.no/
 * Click on the track you want the sensor to follow
-* Find the URL of the opened modal window in the developer tools
-
-The url should be something like `https://skisporet.no/trackstatus/trackstatuspopup:StatusWithRouteInTabsHtml/20067/1616262206395/37125573/60.676331341445966/7.995042800903321`
+* Click "Del løype" at the upper right corner of the popup
+* Find the track id in the URL to copy: e.g. skisporet.no/?fitTs2Id=**12345**&highlightTs2Id=**12345**&map=norges_grunnkart
 - Of course the numbers will be different for different tracks
 
 * Add the following to your sensor-config in HA:
@@ -21,7 +19,7 @@ The url should be something like `https://skisporet.no/trackstatus/trackstatuspo
 ```
 - platform: skisporet
   name: My track
-  url: https://skisporet.no/trackstatus/trackstatuspopup:StatusWithRouteInTabsHtml/20067/1616262206395/37125573/60.676331341445966/7.995042800903321
+  track_id: 12345
 ```
 
 * Restart Home Assistant
