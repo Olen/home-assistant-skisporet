@@ -14,7 +14,6 @@ from homeassistant.const import (
     CONF_NAME,
     CONF_URL,
     DEVICE_CLASS_TIMESTAMP,
-    HTTP_BAD_REQUEST,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 import homeassistant.helpers.config_validation as cv
