@@ -2,6 +2,7 @@
   "domain": "skisporet",
   "name": "Skisporet",
   "documentation": "",
+  "requirements": ["pandas"],
   "version": "0.1.1",
   "codeowners": ["@Olen"]
 }
