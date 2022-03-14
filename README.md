@@ -3,8 +3,17 @@
 Adds a sensor to get the last time a ski track was prepared according to skisporet.no
 
 ## Install
-* create a new folder under config/custom_components called "skisporet"
-* copy all the files from this repo to the new folder
+
+This can be installed manually or through HACS
+
+### Via HACS
+* Add this repo as a "Custom repository" with type "Integration"
+* Click "Install" in the new "Skisporet" card in HACS
+* Restart Home Assistant
+
+### Manual installation
+* Create a new folder under config/custom_components called "skisporet"
+* Copy all the files from this repo to the new folder
 
 ## Config
 To set up a new sensor, you need the track-id from skisporet.no
