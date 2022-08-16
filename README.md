@@ -34,3 +34,6 @@ To set up a new sensor, you need the track-id from skisporet.no
 * Restart Home Assistant
 
 
+<a href="https://www.buymeacoffee.com/olatho" target="_blank">
+<img src="https://user-images.githubusercontent.com/203184/184674974-db7b9e53-8c5a-40a0-bf71-c01311b36b0a.png" style="height: 50px !important;"> 
+</a>
