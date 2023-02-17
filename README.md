@@ -7,8 +7,11 @@ Adds a sensor to get the last time a ski track was prepared according to skispor
 This can be installed manually or through HACS
 
 ### Via HACS
-* Add this repo as a "Custom repository" with type "Integration"
-* Click "Install" in the new "Skisporet" card in HACS
+* Open HACS
+* Click "Integrations"
+* Click the three dots in the upper right corner and select "Custom Repositiories"
+* Add the link to this repo with type "Integration"
+* Click "Download this repository with HACS" in the new "Skisporet" card in HACS
 * Restart Home Assistant
 
 ### Manual installation
