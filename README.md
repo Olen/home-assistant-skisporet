@@ -47,6 +47,8 @@ Then go to HomeAssistant, Settings, Devices and Services.
 > **Note**
 >
 > Skisporet reports last preparation as something like "X days and Y hours ago".  To try to keep a consistent sensor value, this "timestamp" is converted to a datetime-object with minutes and seconds set to zero.  
+>
+> If last prep was more than 14 days ago, skipsoret only reports it as "More than 14 days ago".  This integration will the always set the timestamp to Jan. 1. 2000. when it receives that update.
 
 
 <a href="https://www.buymeacoffee.com/olatho" target="_blank">
