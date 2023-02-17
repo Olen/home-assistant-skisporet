@@ -39,7 +39,7 @@ _LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NAME = "skisporet"
 
-SCAN_INTERVAL = timedelta(seconds=60)
+SCAN_INTERVAL = timedelta(minutes=5)
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -156,6 +156,36 @@ class SkisporetSensor(Entity):
                 days=int(features["newest_prep_days"]),
                 hours=int(features["newest_prep_hours"]),
             )
+            native_value = native_value.replace(minute=0, second=0, microsecond=0)
+
+            if self.native_value:
+                if native_value > self.native_value:
+                    _LOGGER.debug(
+                        "New native value: %s Was: %s", native_value, self.native_value
+                    )
+                    if native_value - self.native_value == timedelta(hours=1):
+                        # This is probably just a time-skew. Just keep previous value
+                        _LOGGER.debug(
+                            "Time skew detected.  Was: %s, New: %s",
+                            self.native_value,
+                            native_value,
+                        )
+                        native_value = self.native_value
+                elif self.native_value > native_value:
+                    _LOGGER.debug(
+                        "New native value: %s Was: %s", native_value, self.native_value
+                    )
+                    if self.native_value - native_value == timedelta(
+                        hours=1
+                    ) and datetime.now() - native_value > timedelta(hours=1):
+                        # This is probably just a time-skew. Just keep previous value
+                        _LOGGER.debug(
+                            "Time skew detected.  Was: %s, New: %s",
+                            self.native_value,
+                            native_value,
+                        )
+                        native_value = self.native_value
+
         self.native_value = native_value.replace(minute=0, second=0, microsecond=0)
 
         if trails:
