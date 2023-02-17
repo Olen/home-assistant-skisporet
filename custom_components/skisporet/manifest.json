@@ -1,8 +1,11 @@
 {
   "domain": "skisporet",
   "name": "Skisporet",
-  "documentation": "",
-  "requirements": ["pandas"],
-  "version": "0.1.1",
-  "codeowners": ["@Olen"]
+  "version": "2.0.0",
+  "documentation": "https://github.com/Olen/home-assistant-skisporet",
+  "issue_tracker": "https://github.com/Olen/home-assistant-skisporet/issues",
+  "codeowners": ["@Olen"],
+  "iot_class": "cloud_polling",
+  "config_flow": true,
+  "requirements": []
 }
