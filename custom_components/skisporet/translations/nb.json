@@ -1,0 +1,17 @@
+{
+    "title": "Skisporet",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Legg til ny løype",
+                "data": {
+                    "url": "URL fra skisporet.no",
+                    "name": "Navn på løypa"
+                }
+            }
+        },
+        "abort": {
+          "already_configured": "Allerede konfigurert"
+        }
+    }
+}
