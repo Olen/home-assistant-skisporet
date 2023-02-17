@@ -2,6 +2,12 @@
 
 Adds a sensor to get the last time a ski track was prepared according to skisporet.no
 
+# BREAKING CHANGE
+
+Due to changes at skisporet.no some attributes are no longer available, and others have appeared.
+
+You also ned to set this integration up from scratch again from the UI.  Old yaml-config is no longer supported.
+
 ## Install
 
 This can be installed manually or through HACS

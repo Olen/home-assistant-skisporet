@@ -4,20 +4,15 @@ from __future__ import annotations
 import logging
 import voluptuous as vol
 
-from homeassistant import config_entries, data_entry_flow
-from homeassistant.components.sensor import SensorDeviceClass
+from homeassistant import config_entries
 from homeassistant.const import (
-    ATTR_DEVICE_CLASS,
-    ATTR_DOMAIN,
-    ATTR_ENTITY_PICTURE,
     CONF_NAME,
     CONF_URL,
 )
 from homeassistant.helpers import config_validation as cv
 
 from .const import (
-    ATTR_SEGMENT_ID,
-    ATTR_TRACK_ID,
+    CONF_TRACK_ID,
     DOMAIN,
 )
 
@@ -39,7 +34,7 @@ class SkipsoretConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(
             title=import_input[CONF_NAME],
             data={
-                CONF_URL: f"https://www.skisporet.no/map/segment/{import_input[ATTR_TRACK_ID]}",
+                CONF_URL: f"https://www.skisporet.no/map/segment/{import_input[CONF_TRACK_ID]}",
                 CONF_NAME: import_input[CONF_NAME],
             },
         )

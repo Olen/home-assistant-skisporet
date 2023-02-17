@@ -1,7 +1,6 @@
 """Support for weather service."""
 import asyncio
 import logging
-import re
 from datetime import datetime, timedelta
 
 import aiohttp
@@ -11,14 +10,14 @@ import voluptuous as vol
 from homeassistant.components.sensor import ENTITY_ID_FORMAT, PLATFORM_SCHEMA
 
 
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 
 from homeassistant.const import (
     CONF_NAME,
     CONF_URL,
 )
-from homeassistant.components.sensor.const import (
+from homeassistant.components.sensor import (
     SensorDeviceClass,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -26,14 +25,28 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from homeassistant.util import dt as dt_util
 from homeassistant.util import slugify
 
-from .const import DOMAIN, ATTR_DISTANCE, ATTR_TRAIL_NAME, ATTR_TRAIL_TYPE, ICON
+from .const import (
+    ATTR_DISTANCE,
+    ATTR_TRAIL_NAME,
+    ATTR_TRAIL_TYPE,
+    ICON,
+    CONF_TRACK_ID,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NAME = "skisporet"
+
+SCAN_INTERVAL = timedelta(seconds=60)
+
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+        vol.Required(CONF_TRACK_ID): cv.string,
+    }
+)
 
 
 async def async_setup_entry(
@@ -57,7 +70,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 class SkisporetSensor(Entity):
     """A sensor for a track"""
 
-    def __init__(self, hass, name, url) -> None:
+    def __init__(self, hass: HomeAssistant, name: str, url: str) -> None:
         """Initialize the sensor."""
         self.hass = hass
         self._name = name
@@ -72,7 +85,7 @@ class SkisporetSensor(Entity):
         self.entity_id = ENTITY_ID_FORMAT.format(
             slugify(self.entity_slug.replace(" ", "_"))
         )
-        _LOGGER.info(f"Added skisporet-sensor {self.entity_id}")
+        _LOGGER.info("Added skisporet-sensor %s", self.entity_id)
 
     @property
     def unique_id(self):
@@ -112,9 +125,13 @@ class SkisporetSensor(Entity):
         """Return segment_id from url"""
         return self._url.split("/")[5]
 
+    async def async_added_to_hass(self):
+        """Fetch data when we start."""
+        await self.async_update()
+
     async def async_update(self):
         """Fetch status from skisporet."""
-        _LOGGER.debug(f"Updating skisporet-sensor for {self._name}")
+        _LOGGER.debug("Updating skisporet-sensor for %s", self._name)
 
         websession = async_get_clientsession(self.hass)
         json_url = self._url + "?_data=routes%2Fmap%2Fsegment.%24segmentId"
@@ -123,7 +140,7 @@ class SkisporetSensor(Entity):
                 resp = await websession.get(json_url)
             segment = await resp.json()
         except (asyncio.TimeoutError, aiohttp.ClientError) as err:
-            _LOGGER.error(f"No data from skisporet: {err}")
+            _LOGGER.error("No data from skisporet: %s", err)
             return
         except Exception as err:
             _LOGGER.error(err)
@@ -133,13 +150,13 @@ class SkisporetSensor(Entity):
         trails = segment["segment"]["trails"]
 
         if features["newest_prep_days"] > 14:
-            self.native_value = datetime(2000, 1, 1)
+            native_value = datetime(2000, 1, 1)
         else:
-            dt = datetime.now() - timedelta(
+            native_value = datetime.now() - timedelta(
                 days=int(features["newest_prep_days"]),
                 hours=int(features["newest_prep_hours"]),
             )
-            self.native_value = dt.replace(minute=0, second=0, microsecond=0)
+        self.native_value = native_value.replace(minute=0, second=0, microsecond=0)
 
         if trails:
             self._distance = trails[0]["totalLengthOfAllSegments"]

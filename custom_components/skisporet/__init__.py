@@ -1,16 +1,19 @@
 """The skisporet component."""
 
+import logging
+
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.config_entries import ConfigEntry
 
 from .const import DOMAIN
 
 PLATFORMS = ["sensor"]
+_LOGGER = logging.getLogger(__name__)
 
 
-def setup(hass: HomeAssistant, config: ConfigEntry):
-    """Set up this using config flow."""
-    return True
+# def setup(hass: HomeAssistant, config: ConfigEntry):
+#    """Set up this using config flow."""
+#     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
