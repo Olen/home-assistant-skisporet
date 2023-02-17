@@ -3,7 +3,6 @@ import asyncio
 import logging
 import re
 from datetime import datetime, timedelta
-import pandas as pd
 
 import aiohttp
 import async_timeout
