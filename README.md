@@ -44,6 +44,11 @@ Then go to HomeAssistant, Settings, Devices and Services.
 * Add the URL you copied, and give this track a name
 * Click "Submit"
 
+> **Note**
+>
+> Skisporet reports last preparation as something like "X days and Y hours ago".  To try to keep a consistent sensor value, this "timestamp" is converted to a datetime-object with minutes and seconds set to zero.  
+
+
 <a href="https://www.buymeacoffee.com/olatho" target="_blank">
 <img src="https://user-images.githubusercontent.com/203184/184674974-db7b9e53-8c5a-40a0-bf71-c01311b36b0a.png" style="height: 50px !important;"> 
 </a>
