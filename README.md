@@ -2,6 +2,9 @@
 
 Adds a sensor to get the last time a ski track was prepared according to skisporet.no
 
+![image](https://user-images.githubusercontent.com/203184/219651567-db1f47df-bc0f-4988-8dc6-f3260c86f33c.png)
+
+
 # BREAKING CHANGE
 
 Due to changes at skisporet.no some attributes are no longer available, and others have appeared.
