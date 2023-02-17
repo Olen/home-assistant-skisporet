@@ -1,0 +1,17 @@
+{
+    "title": "Skisporet",
+    "config": {
+        "step": {
+            "user": {
+                "title": "Add new track",
+                "data": {
+                    "url": "URL from skisporet.no",
+                    "name": "Track name"
+                }
+            }
+        },
+        "abort": {
+          "already_configured": "Device is already configured"
+        }
+    }
+}
