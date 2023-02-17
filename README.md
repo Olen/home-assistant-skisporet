@@ -24,7 +24,7 @@ The integration is set up from the GUI in HA
 First, you need the share-link from skisporet.no
 * Open the map in a browser https://skisporet.no/
 * Click on the track you want the sensor to follow
-* Click "Del løype" at the upper left corner of the popup
+* Click the "Share" icon at the upper left corner of the popup
 * Click "Kopier lenke"
 
 Then go to HomeAssistant, Settings, Devices and Services.
