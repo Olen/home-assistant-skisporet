@@ -5,6 +5,8 @@ Adds a sensor to get the last time a ski track was prepared according to skispor
 ![image](https://user-images.githubusercontent.com/203184/219651567-db1f47df-bc0f-4988-8dc6-f3260c86f33c.png)
 
 
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=skisporet)
+
 # BREAKING CHANGE
 
 > **Warning**
@@ -43,6 +45,10 @@ Then go to HomeAssistant, Settings, Devices and Services.
 * Search for "Skisporet"
 * Add the URL you copied, and give this track a name
 * Click "Submit"
+
+If you have set up "My Homeassistant", you can use this link:
+
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=skisporet)
 
 > **Note**
 >
