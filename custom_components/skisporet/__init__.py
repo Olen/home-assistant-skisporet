@@ -20,9 +20,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Set up skiporet from config entry"""
     if DOMAIN not in hass.data:
         hass.data[DOMAIN] = {}
-    for component in PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(entry, component)
-        )
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    # for component in PLATFORMS:
+    #     hass.async_create_task(
+    #         hass.config_entries.async_forward_entry_setup(entry, component)
+    #     )
 
     return True
