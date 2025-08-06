@@ -1,5 +1,16 @@
 # home-assistant-skisporet
 
+> **Warning**
+>
+> Skisporet og iMarka blir Sporet
+>
+> Før skisesongen 2025-2026 vil iMarka (Skiforeningen) og Skisporet (Swix) gå sammen i en felles, landsdekkende tjeneste: Sporet.
+>
+> Siden denne tjenesten ikke er operativ enda, og ting tyder på at det vil bli en betaltjeneste, er det mulig at dette prosjektet må legges ned,
+> litt avhengig av hvordan APIer osv vil se ut og kunne brukes.
+
+
+
 Adds a sensor to get the last time a ski track was prepared according to skisporet.no
 
 ![image](https://user-images.githubusercontent.com/203184/219651567-db1f47df-bc0f-4988-8dc6-f3260c86f33c.png)
