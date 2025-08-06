@@ -8,7 +8,10 @@
 >
 > Siden denne tjenesten ikke er operativ enda, og ting tyder på at det vil bli en betaltjeneste, er det mulig at dette prosjektet må legges ned,
 > litt avhengig av hvordan APIer osv vil se ut og kunne brukes.
-
+>
+> https://www.skiforeningen.no/nyheter/landsdekkende-foremelding/
+>
+> 
 
 
 Adds a sensor to get the last time a ski track was prepared according to skisporet.no
