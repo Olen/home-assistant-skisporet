@@ -1,6 +1,6 @@
 # home-assistant-skisporet
 
-> **Warning**
+> [!WARNING]
 >
 > Skisporet og iMarka blir Sporet
 >
@@ -9,7 +9,7 @@
 
 This project will NOT be updated to the new APIs.
 
-Please move to this prject instead: https://github.com/toringer/home-assistant-sporet
+Please move to this prjoect instead: https://github.com/toringer/home-assistant-sporet
 
 
 # Legacy info
